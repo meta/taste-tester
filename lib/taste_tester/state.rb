@@ -24,6 +24,7 @@ module TasteTester
   # State of taste-tester processes
   class State
     include TasteTester::Config
+    include TasteTester::Logging
     extend TasteTester::Logging
     include ::BetweenMeals::Util
 
