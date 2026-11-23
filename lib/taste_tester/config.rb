@@ -15,6 +15,7 @@
 require 'mixlib/config'
 require 'taste_tester/logging'
 require 'between_meals/util'
+require 'etc'
 
 module TasteTester
   # Config file parser and config object
@@ -65,6 +66,7 @@ module TasteTester
     json false
     jumps nil
     windows_target false
+    parallel_hosts Etc.nprocessors
 
     # Start/End refs for calculating changes in the repo.
     #  - start_ref should be the "master" commit of the repository

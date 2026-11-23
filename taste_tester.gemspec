@@ -14,7 +14,7 @@
 
 Gem::Specification.new do |s|
   s.name = 'taste_tester'
-  s.version = '0.0.19'
+  s.version = '0.0.21'
   s.summary = 'Taste Tester'
   s.description = 'Utility for testing Chef changes using chef-zero'
   s.license = 'Apache-2.0'
