@@ -140,11 +140,10 @@ module TasteTester
       # we generally use symbols for the keys, but to/from JSON will
       # give us strings, and thus duplicate keys, which is bad. So
       # use a Mash
-      state = Mash.new
       begin
-        state = JSON.parse(File.read(TasteTester::Config.ref_file))
+        state = JSON.parse(File.read(TasteTester::Config.ref_file), :object_class => Mash)
       rescue StandardError
-        state = {}
+        state = Mash.new
       end
       state.merge!(vals)
       ff = File.open(
