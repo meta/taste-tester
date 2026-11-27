@@ -77,4 +77,12 @@ describe TasteTester::State do
     expect(File.read(ref_file).scan(/"ref"\s*:/).size).to eq(1)
     expect(JSON.parse(File.read(ref_file))).to eq('port' => 5257, 'ref' => nil)
   end
+
+  it 'resets to merged values when the ref file holds corrupt JSON' do
+    File.write(ref_file, '{"port":5257,"ref":')
+
+    expect { described_class.new.update(:port => 5258, :ssl => true) }.not_to raise_error
+
+    expect(JSON.parse(File.read(ref_file))).to eq('port' => 5258, 'ssl' => true)
+  end
 end
