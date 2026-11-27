@@ -184,13 +184,15 @@ module TasteTester
       end
     end
 
-    def stop_chef_zero
+    # Pattern defaults to chef-zero; tests pass a unique marker so the real
+    # pkill path runs without touching any live server.
+    def stop_chef_zero(pattern = 'bin/chef-zero')
       if windows?
         extend ::TasteTester::Windows
         nuke_all_cz_pids
       else
         logger.info('Killing your chef-zero instances')
-        s = Mixlib::ShellOut.new("pkill -9 -u #{ENV['USER']} -f bin/chef-zero")
+        s = Mixlib::ShellOut.new("pkill -9 -u #{ENV['USER']} -f #{pattern}")
         s.run_command
         # You have to give it a moment to stop or the stat fails
         sleep(1)
